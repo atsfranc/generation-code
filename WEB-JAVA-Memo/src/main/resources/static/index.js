@@ -7,15 +7,19 @@ form.addEventListener("submit", async (e) => {
     await addMemo(memo_content.value);
     updateMemo();
 })
-async function addMemo(message) {
-    let res = await fetch("http://localhost:8081/memos/add", {
+
+async function addMemo(message){
+    let option =
+    {
         method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
+            headers: {
+        "Content-Type": "application/json"
+    },
         body: JSON.stringify({ "content": message })
-    });
+    }
+    let res = await fetch("http://localhost:8081/memos/add", option);
 }
+
 async function getMemos() {
     let res = await fetch("http://localhost:8081/memos/all");
     let memos = await res.json();
